@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="searchApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Engine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 20px;
+        }
+        
+        .search-box {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .category {
+            margin-bottom: 10px;
+        }
+        
+        .category-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .category-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .category-items li {
+            padding: 5px;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s ease;
+        }
+        
+        .category-items li:last-child {
+            border-bottom: none;
+        }
+        
+        .category-items li:hover {
+            background-color: #f9f9f9;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="searchApp">
+    <div class="container" ng-controller="SearchController">
+        <h1 style="text-align: center;">Search Engine</h1>
+        <input type="text" class="search-box" ng-model="query" ng-keypress="handleKeyPress($event)" placeholder="Search...">
+        <div ng-if="showResults">
+            <div class="category">
+                <h2 class="category-title">{{ category }}</h2>
+                <ul class="category-items">
+                    <li ng-repeat="item in items">{{ item }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        angular.module('searchApp', [])
+            .controller('SearchController', function ($scope) {
+                $scope.showResults = false;
+                $scope.handleKeyPress = function (event) {
+                    if (event.keyCode === 13) { // Enter key
+                        var query = $scope.query.toLowerCase();
+                        if (query === 'fruits' || query === 'vegetables' || query === 'drinks') {
+                            $scope.category = query.charAt(0).toUpperCase() + query.slice(1);
+                            $scope.items = $scope.getCategoryItems(query);
+                            $scope.showResults = true;
+                        } else {
+                            $scope.showResults = false;
+                        }
+                    }
+                };
+
+                $scope.getCategoryItems = function (category) {
+                    switch (category) {
+                        case 'fruits':
+                            return ["Apple", "Banana", "Orange", "Mango"];
+                        case 'vegetables':
+                            return ["Carrot", "Broccoli", "Spinach", "Potato"];
+                        case 'drinks':
+                            return ["Water", "Juice", "Soda", "Coffee"];
+                        default:
+                            return [];
+                    }
+                };
+            });
+    </script>
+</body>
+</html>
