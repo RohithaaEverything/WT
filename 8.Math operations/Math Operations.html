@@ -1,0 +1,82 @@
+<html>
+<h1>Math Operations</h1>
+<head>
+<title>Math Operations</title>
+<script>
+function factorial(){
+var i,no,fact;
+fact=1;
+no=Number(document.getElementById("n").value);
+for(i=1;i<=no;i++)
+fact=fact*i;
+document.getElementById("output").value=fact;}
+function fibonacci(){
+var var1=0;
+var var2=1;
+var var3,i;
+var st="0"+" "+"1";
+var no=Number(document.getElementById("n").value);
+for(i=3;i<=no;i++){
+var3=var1+var2;
+var1=var2;
+var2=var3;
+st=st+" "+String(var3);
+}
+document.getElementById("output").value=st;
+}
+function prime(){
+var i=0;
+var j=0;
+var no;
+var st="";
+no=Number(document.getElementById("n").value);
+for(i=1;i<=no;i++){
+c=0;
+for(j=1;j<=i;j++){
+if(i%j==0)
+c++;
+}
+if(c==2)
+st=st+" "+String(i);
+}
+document.getElementById("output").value=st;
+}
+function palindrome(){
+var rem,temp,final=0;
+var number=Number(document.getElementById("n").value);
+temp=number;
+while(number>0){
+rem=number%10;
+number=parseInt(number/10);
+final=final*10+rem;
+}
+if(final==temp){
+document.getElementById("output").value="Given Number is Palindrome";
+}
+else{
+document.getElementById("output").value="Given Number is Not Palindrome";
+}
+}
+</script>
+</head>
+<body>
+<table border="1" width="400">
+<tr>
+<th>Enter the Input</th>
+<td><input type="text" id="n"></td>
+</tr>
+<tr>
+<th>Output</th>
+<td><textarea name="output" rows="5" cols="20" id="output"></textarea></td>
+</tr>
+<tr>
+<td colspan="2" align="center">
+<button onclick="factorial()" class="one">Factorial</button>
+<button onclick="fibonacci()" class="two">Fibonacci</button>
+<button onclick="prime()" class="three">Prime Numbers</button>
+<button onclick="palindrome()" class="four">Palindrome</button>
+</td>
+</tr>
+</table>
+</body>
+</html>
