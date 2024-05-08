@@ -1,0 +1,88 @@
+<html>
+<head>
+<title>Canvas Bgcolors</title>
+<style>
+  table, td, th {border: 1px solid black;
+    border-collapse: collapse;}
+  th,td {text-align: center;}
+</style>
+</head>
+<body>
+  <center>
+    <table>
+      <tr>
+        <th>S.No</th>
+        <th>Name of the shape</th>
+        <th>Shape</th>
+      </tr>
+      <tr>
+        <td>1.</td>
+        <td>Circle</td>
+        <td>
+          <canvas id="1" width="200" height="150" style="border: 1px solid black; margin: 20px;"></canvas>
+          <script>
+            var c = document.getElementById('1');
+            var ctx = c.getContext('2d');
+            ctx.beginPath();
+            ctx.arc(100, 70, 55, 0, 2 * Math.PI);
+            ctx.fillStyle = "darkblue"; 
+            ctx.fill();
+            ctx.strokeStyle = "black"; 
+            ctx.stroke();
+          </script>
+        </td>
+      </tr>
+      <tr>
+        <td>2.</td>
+        <td>Square</td>
+        <td>
+          <canvas id="2" width="100" height="100" style="border: 1px solid black; margin: 20px;"></canvas>
+          <script>
+            var c = document.getElementById('2');
+            var ctx = c.getContext('2d');
+            ctx.fillStyle = "purple"; 
+            ctx.fillRect(10, 10, 80, 80);
+            ctx.strokeStyle = "black"; 
+            ctx.strokeRect(10, 10, 80, 80);
+          </script>
+        </td>
+      </tr>
+      <tr>
+        <td>3.</td>
+        <td>Rectangle</td>
+        <td>
+          <canvas id="3" width="200" height="150" style="border: 1px solid black; margin: 20px;"></canvas>
+          <script>
+            var c = document.getElementById('3');
+            var ctx = c.getContext('2d');
+            ctx.fillStyle = "green"; 
+            ctx.fillRect(20, 30, 160, 90);
+            ctx.strokeStyle = "black"; 
+            ctx.strokeRect(20, 30, 160, 90);
+          </script>
+        </td>
+      </tr>
+      <tr>
+        <td>4.</td>
+        <td>Triangle</td>
+        <td>
+          <canvas id="4" width="200" height="150" style="border: 1px solid black; margin: 20px;"></canvas>
+          <script>
+            var c = document.getElementById('4');
+            var ctx = c.getContext('2d');
+            ctx.beginPath();
+            ctx.moveTo(20, 100);
+            ctx.lineTo(100, 30);
+            ctx.lineTo(175, 100);
+            ctx.lineTo(20, 100);
+            ctx.fillStyle = "red"; 
+            ctx.fill();
+            ctx.strokeStyle = "black"; 
+            ctx.stroke();
+          </script>
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
+</html>
