@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Duration Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .active-duration {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Active Duration Tracker</h1>
+    <div id="login-form">
+        <h2>Login</h2>
+        <form id="login-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <div id="logout-form" style="display: none;">
+        <h2>Logout</h2>
+        <p id="login-time-display">Login Time: 0 seconds</p>
+        <button id="logout-button">Logout</button>
+    </div>
+    <div class="active-duration" id="active-duration" style="display: none;">
+        <h2>Your Active Duration:</h2>
+        <p id="duration-display"></p>
+    </div>
+    <script>
+        // Simulate login and logout actions
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('logout-form').style.display = 'block';
+            // Here, you would typically send the login request to your backend
+            // For demonstration, we'll simulate a login and show the logout button
+            // Start the active duration timer
+            var loginTime = new Date();
+            var loginTimeDisplay = document.getElementById('login-time-display');
+            var intervalId = setInterval(function() {
+                var currentTime = new Date();
+                var elapsedSeconds = Math.floor((currentTime - loginTime) / 1000);
+                loginTimeDisplay.textContent = "Login Time: " + elapsedSeconds + " seconds";
+            }, 1000);
+
+            document.getElementById('logout-button').addEventListener('click', function() {
+                clearInterval(intervalId);
+                var logoutTime = new Date();
+                var activeDuration = logoutTime - loginTime;
+                document.getElementById('active-duration').style.display = 'block';
+                document.getElementById('duration-display').textContent = formatDuration(activeDuration);
+            });
+        });
+
+        function formatDuration(duration) {
+            var seconds = Math.floor((duration / 1000) % 60);
+            var minutes = Math.floor((duration / (1000 * 60)) % 60);
+            var hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+            return hours + " hours " + minutes + " minutes " + seconds + " seconds";
+        }
+    </script>
+</body>
+</html>
